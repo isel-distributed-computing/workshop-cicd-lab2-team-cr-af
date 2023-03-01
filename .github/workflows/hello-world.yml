@@ -8,3 +8,11 @@ jobs:
     - name: Run a one-line script
       run:
         echo Hello World
+  A:
+    runs-on: ubuntu-latest
+    needs: hello-world-job
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run a one-line script
+      run:
+        echo Hello World2
