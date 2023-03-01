@@ -2,6 +2,8 @@ name: Hello world
 on: 
   schedule:
     - cron:  '*/10 * * * *'
+env:
+  JWT_SECRET: "secret"
 jobs:
   hello-world-job:
     runs-on: ubuntu-latest
