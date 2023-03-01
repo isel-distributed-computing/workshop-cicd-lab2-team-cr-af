@@ -2,7 +2,7 @@ name: Java CI with Maven
 on:
   push
 env:
-  JWT_SECRET: $secret
+  JWT_SECRET: ${{secrets.JWT_SECRET}}
 jobs:
  build-auth-service:
   runs-on: ubuntu-latest
