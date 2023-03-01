@@ -5,7 +5,11 @@ env:
   JWT_SECRET: ${{secrets.JWT_SECRET}}
 jobs:
  build-auth-service:
-  runs-on: ubuntu-latest
+  strategy:
+   matrix:
+    jdk: [17]
+    os: [ubuntu-18.04, ubuntu-22.04]
+  runs-on: ${{matrix.os}}
   steps:
   - uses: actions/checkout@v3
   - name: Set up JDK 17
@@ -17,9 +21,13 @@ jobs:
   - name: Build Auth Service with Maven
     run: |
      cd authusers
-     mvn test -D$JWT_SECRET
+     mvn test -D${{envJWT_SECRET}}
  build-todolist-service:
-  runs-on: ubuntu-latest
+  strategy:
+   matrix:
+    jdk: [17]
+    os: [ubuntu-18.04, ubuntu-22.04]
+  runs-on: ${{matrix.os}}
   steps:
   - uses: actions/checkout@v3
   - name: Set up JDK 17
@@ -31,9 +39,13 @@ jobs:
   - name: Build todolist Service with Maven
     run: |
      cd todolist
-     mvn test -D$JWT_SECRET
+     mvn test -D${{envJWT_SECRET}}
  build-notifications-service:
-  runs-on: ubuntu-latest
+  strategy:
+   matrix:
+    jdk: [17]
+    os: [ubuntu-18.04, ubuntu-22.04]
+  runs-on: ${{matrix.os}}
   steps:
   - uses: actions/checkout@v3
   - name: Set up JDK 17
@@ -45,4 +57,4 @@ jobs:
   - name: Build notifications Service with Maven
     run: |
      cd notifications
-     mvn test -D$JWT_SECRET
+     mvn test -D${{envJWT_SECRET}}
