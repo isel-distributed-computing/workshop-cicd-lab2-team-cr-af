@@ -1,6 +1,8 @@
 name: Java CI with Maven
 on:
   push
+env:
+  JWT_SECRET: $secret
 jobs:
  build-auth-service:
   runs-on: ubuntu-latest
@@ -15,7 +17,7 @@ jobs:
   - name: Build Auth Service with Maven
     run: |
      cd authusers
-     mvn -B package -Dmaven.test.skip=true
+     mvn test -D$JWT_SECRET
  build-todolist-service:
   runs-on: ubuntu-latest
   steps:
@@ -29,7 +31,7 @@ jobs:
   - name: Build todolist Service with Maven
     run: |
      cd todolist
-     mvn -B package -Dmaven.test.skip=true
+     mvn test -D$JWT_SECRET
  build-notifications-service:
   runs-on: ubuntu-latest
   steps:
@@ -43,4 +45,4 @@ jobs:
   - name: Build notifications Service with Maven
     run: |
      cd notifications
-     mvn -B package -Dmaven.test.skip=true
+     mvn test -D$JWT_SECRET
