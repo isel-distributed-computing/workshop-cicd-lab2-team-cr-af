@@ -21,7 +21,7 @@ jobs:
   - name: Build Auth Service with Maven
     run: |
      cd authusers
-     mvn test -D${{envJWT_SECRET}}
+     mvn test -D${{env.JWT_SECRET}}
  build-todolist-service:
   strategy:
    matrix:
@@ -39,7 +39,7 @@ jobs:
   - name: Build todolist Service with Maven
     run: |
      cd todolist
-     mvn test -D${{envJWT_SECRET}}
+     mvn test -D${{env.JWT_SECRET}}
  build-notifications-service:
   strategy:
    matrix:
@@ -57,4 +57,4 @@ jobs:
   - name: Build notifications Service with Maven
     run: |
      cd notifications
-     mvn test -D${{envJWT_SECRET}}
+     mvn test -D${{env.JWT_SECRET}}
