@@ -1,4 +1,4 @@
-name: Hello world
+name: Hello world On-Premise
 on: workflow_dispatch
 jobs:
  # the id of the name
