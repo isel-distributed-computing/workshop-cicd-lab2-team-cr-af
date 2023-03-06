@@ -10,7 +10,7 @@ jobs:
   strategy:
    matrix:
     jdk: [17]
-    os: [ubuntu-18.04, ubuntu-22.04]
+    os: [ubuntu-18.04, ubuntu-22.04, self-hosted]
   runs-on: ${{matrix.os}}
   steps:
   - uses: actions/checkout@v3
@@ -28,7 +28,7 @@ jobs:
   strategy:
    matrix:
     jdk: [17]
-    os: [ubuntu-18.04, ubuntu-22.04]
+    os: [ubuntu-18.04, ubuntu-22.04, self-hosted]
   runs-on: ${{matrix.os}}
   steps:
   - uses: actions/checkout@v3
@@ -46,7 +46,7 @@ jobs:
   strategy:
    matrix:
     jdk: [17]
-    os: [ubuntu-18.04, ubuntu-22.04]
+    os: [ubuntu-18.04, ubuntu-22.04, self-hosted]
   runs-on: ${{matrix.os}}
   steps:
   - uses: actions/checkout@v3
@@ -61,7 +61,11 @@ jobs:
      cd notifications
      mvn test -D${{env.JWT_SECRET}}
  publish-docker-image:
-  runs-on: ubuntu-latest
+  strategy:
+   matrix:
+    jdk: [17]
+    os: [ubuntu-latest, self-hosted]
+  runs-on: ${{matrix.os}}
   needs:  build-auth-service 
   steps:
    - uses: actions/checkout@v3
