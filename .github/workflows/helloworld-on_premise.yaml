@@ -2,12 +2,13 @@ name: Hello world On-Premise
 on: workflow_dispatch
 jobs:
  # the id of the name
- hello-world-job: 
+ hello-world-on-premise-job: 
  # The type of runner that the job will run on
  runs-on: self-hosted 
  # Sequence of tasks that will be executed as part of the job
  steps:
  # Checks-out the repository
+ - uses: actions/checkout@v3
  # Runs a single command using the runner shell
  - name: Run a one-line script
  run: 
