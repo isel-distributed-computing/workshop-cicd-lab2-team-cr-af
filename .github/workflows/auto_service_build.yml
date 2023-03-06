@@ -61,29 +61,29 @@ jobs:
      cd notifications
      mvn test -D${{env.JWT_SECRET}}
  publish-docker-image:
-    strategy:
-       matrix:
-        jdk: [17]
-        os: [ubuntu-18.04, ubuntu-22.04]
-    runs-on: ${{matrix.os}}
-    needs:  build-auth-service 
-    steps:
-    - name: Log in to the Container registry
-      uses: docker/login-action@v2
-      with:
-       registry: ${{ env.REGISTRY }}
-       username: ${{ github.actor }}
-       password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Extract metadata (tags, labels) for Docker4
-      id: meta-auth
-      uses: docker/metadata-action@v4
-      with:
-       images: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME }}/authusers
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4
-      with:
-       context: /authusers/.
-       file: /authusers/Dockerfile
-       push: true
-       tags: ${{ steps.meta-auth.outputs.tags }}
-       labels: ${{ steps.meta-auth.outputs.labels }}
+  strategy:
+   matrix:
+    jdk: [17]
+    os: [ubuntu-18.04, ubuntu-22.04]
+  runs-on: ${{matrix.os}}
+  needs:  build-auth-service 
+  steps:
+   - name: Log in to the Container registry
+     uses: docker/login-action@v2
+     with:
+      registry: ${{ env.REGISTRY }}
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
+   - name: Extract metadata (tags, labels) for Docker4
+     id: meta-auth
+     uses: docker/metadata-action@v4
+     with:
+      images: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME }}/authusers
+   - name: Build and push Docker image
+     uses: docker/build-push-action@v4
+     with:
+      context: authusers/.
+      file: authusers/Dockerfile
+      push: true
+      tags: ${{ steps.meta-auth.outputs.tags }}
+      labels: ${{ steps.meta-auth.outputs.labels }}
